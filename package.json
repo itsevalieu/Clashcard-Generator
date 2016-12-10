@@ -1,0 +1,25 @@
+{
+  "name": "clashcard-generator",
+  "version": "1.0.0",
+  "description": "Allows user to create two types of flashcards via a node command-line interface. ",
+  "main": "CLI.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsevalieu/Clashcard-Generator.git"
+  },
+  "keywords": [
+    "node",
+    "flashcards",
+    "cloze",
+    "basic"
+  ],
+  "author": "Eva Lieu" "itsevalieu@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsevalieu/Clashcard-Generator/issues"
+  },
+  "homepage": "https://github.com/itsevalieu/Clashcard-Generator#readme"
+}
