@@ -16,7 +16,7 @@
     "cloze",
     "basic"
   ],
-  "author": "Eva Lieu" "itsevalieu@gmail.com",
+  "author": ["Eva Lieu", "itsevalieu@gmail.com"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/itsevalieu/Clashcard-Generator/issues"
