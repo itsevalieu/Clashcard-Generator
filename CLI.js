@@ -16,21 +16,25 @@ inquirer.prompt([
 			return console.log("Error! Something went wrong!");
 		}
 		var users = data.split(","); //array of users
-		console.log("Current Users: " + users);
+		
+		var found = false;
 		for(var i = 0; i < users.length; i++){ //ERROR: Keeps doing same action. 
 			if(answers.name === users[i]){
 				console.log("Match!");
-			}
-			if(answers.name !== users[i]){
-				console.log("No Match!");
-				fs.appendFile("username.txt", "," + answers.name, function(error, data){
-					if(error){
-						return console.log("Error! Something went wrong!");
-					}
-					console.log("New user added! Welcome " + answers.name);
-				});
+				found = true;
 			}
 		}
+		if(found === false){
+			fs.appendFile("username.txt", "," + answers.name, function(error, data){
+				if(error){
+					return console.log("Error! Something went wrong!");
+				}
+				console.log("New user added! Welcome " + answers.name);
+				console.log("Current Users: " + users);
+			});
+		}
+
+
 	});
 
 /*
