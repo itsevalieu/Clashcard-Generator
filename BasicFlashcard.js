@@ -1,18 +1,33 @@
 var fs = require("fs");
 
-function BasicFlashcard (front, back) { 
-	this.id = id;
-	this.front = front;
-	this.back = back;
+function BasicFlashcard (username, type, front, back) { 
+	this.username = username,
+	this.type = type,
+	this.front = front,
+	this.back = back,
 	this.addCard = function(){
-/*	if()
-		fs.appendFile("newUser.txt", userInfo, function(err){
+		var newCard = {
+			name: this.username,
+			type: this.type,
+			front: this.front,
+			back: this.back
+		};
+		fs.appendFile("flashcards.txt", newCard, function(err){
 			if(err){
 				return console.log("Error! Something went wrong!");
 			}
-			console.log(userInfo);
-	}
-*/
+			console.log("New card: " + newCard);
+		});
 	}
 }
 module.exports = BasicFlashcard; 
+
+{
+	username: Eva,
+	type = basic,
+
+}
+
+var dog = new BasicFlashcard ("Eva", "basic", "What is a dog?", "An animal");
+
+dog.addCard;

@@ -1,7 +1,7 @@
 var inquirer = require("inquirer");
 var fs = require("fs");
-
 var BasicFlashcard = require("./BasicFlashcard.js");
+var ClozeFlashcard = require("./ClozeFlashcard.js");
 
 inquirer.prompt([
 	{
@@ -20,7 +20,7 @@ inquirer.prompt([
 		var found = false;
 		for(var i = 0; i < users.length; i++){ //ERROR: Keeps doing same action. 
 			if(answers.name === users[i]){
-				console.log("Match!");
+				console.log("\nMatch!");
 				found = true;
 			}
 		}
@@ -33,25 +33,8 @@ inquirer.prompt([
 				console.log("Current Users: " + users);
 			});
 		}
-
-
 	});
 
-/*
-	for(var i = 0; i < username.length; i++){
-		if(answers.name === "new"){
-			var basic = {};
-			var cloze = {};
-			fs.writeFile(answers.name + ".txt", basic + cloze, function(error){
-				if(!error){
-					console.log("We successfully saved our favorite movies to the movies.txt file.");
-				}
-				return console.log(error);
-			}
-		}
-	}
-});
-*/
 	inquirer.prompt([
 		{
 			name: "action",
@@ -76,6 +59,14 @@ inquirer.prompt([
 				console.log("Card Type: " + ans.card);
 				if(ans.card === "basic"){
 					console.log("Run basic."); //Import basicflashcard.js new function to create new objectcards
+					
+					var cat = new BasicFlashcard(answers.name, ans.card, "cat", "dog");
+					cat.addCard();
+					fs.readFile("flashcards.txt", "utf8", function(error, data){
+						if(error){
+							return console.log("Error! Something went wrong!");
+						}
+					});
 				}
 				if(ans.card === "cloze"){
 					console.log("Run cloze."); //Import clozeflashcard.js new function to create new objectcards
