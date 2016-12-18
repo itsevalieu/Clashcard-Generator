@@ -51,23 +51,54 @@ function create(){
 	});	
 }
 function review(){
+	inquirer.prompt([
+		{
+			name: "user",
+			message: "What is your name?",
+			type: "input"
+		},
+		{
+			name: "card",
+			message: "Which card type do you want to review?",
+			type: "list",
+			choices: ["basic", "cloze"]
+		}
+		]).then(function(answers){
 
 			fs.readFile("test.txt", "utf8", function(error, data){
 				var obj = JSON.parse(data); //reading object
-				obj.push(card);
+				var frontArray = [];
 
 				for(var i = 0; i < obj.length; i++){
-					if(obj[i].user === "Matt"){//user chosen
-						console.log("Object fronts:" + obj[i].front) //Calling specific data from test.txt
+					if(answers.user === obj[i].user && answers.card === obj[i].type){//user chosen
+						frontArray.push(obj[i].front); //Calling specific data from test.txt
 					}
-				}											
-				//console.log(card); 
-				//console.log(card.front);
-			});
+				}
+
+				inquirer.prompt([
+					{
+						name: "check",
+						message: "Pick which card you want to see the answer for:",
+						type: "list",
+						choices: frontArray
+					}
+					]).then(function(choice){
+						fs.readFile("test.txt", "utf8", function(error, data){
+							var obj = JSON.parse(data); //reading object
+
+							for(var i = 0; i < obj.length; i++){
+								if(answers.user === obj[i].user && answers.card === obj[i].type && choice.check === obj[i].front){//user chosen
+									console.log("The answer is: " + obj[i].back); //Calling specific data from test.txt
+								}
+							}
+						});
+				});
+			});		
+	});		
 }
 
 
-//Functions Below
+//Functions for Making Flashcards
 function makeBasic(cardType){
 	inquirer.prompt([
 		{
@@ -92,7 +123,7 @@ function makeBasic(cardType){
 			var back = answers.back;
 			
 			var card = new Basic (user, type, front, back);
-			
+
 			fs.readFile("test.txt", "utf8", function(error, data){
 				var obj = JSON.parse(data);
 				obj.push(card);
@@ -106,6 +137,8 @@ function makeBasic(cardType){
 	});
 }
 
+//INCOMPLETE BELOW, figure out a way to ask the user for a statement, and the part of the statement they want to hide.
+
 function makeCloze(cardType){
 	inquirer.prompt([
 		{
@@ -114,22 +147,25 @@ function makeCloze(cardType){
 			type: "input"
 		},
 		{
-			name: "front",
-			message: "What do you want to write on the FRONT of the card?",
+			name: "statement",
+			message: "Write a factual statement.",
 			type: "input"
 		},
 		{
-			name: "back",
-			message: "What do you want to write on the BACK of the card?",
+			name: "subject",
+			message: "What is the subject of that statement?",
 			type: "input"	
 		}
 		]).then(function(answers){
 			var user = answers.user;
 			var type = cardType;
-			var front = answers.front;
-			var back = answers.back;
-			
-			var card = new Basic (user, type, front, back);d.back;
+			var statement = answers.statement;
+			var subject = answers.subject;
+
+			clozeStatement = statement.replace(subject, "...");
+			console.log(clozeStatement);
+		
+			var card = new Cloze (user, type, statement, clozeStatement);
 
 			fs.readFile("test.txt", "utf8", function(error, data){
 				var obj = JSON.parse(data);
