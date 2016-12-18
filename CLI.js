@@ -8,7 +8,9 @@ inquirer.prompt([
 		name: "name",
 		message: "What's your name?"
 	}
-]).then(function(answers){
+	
+	]).then(function(answers){
+	
 	console.log("Your name is: " + answers.name);
 
 	fs.readFile("username.txt", "utf8", function(error, data){
