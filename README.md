@@ -1,2 +1,5 @@
-# Clashcard-Generator
-# This flashcard application can help you study by making basic Q&A flashcards and cloze flashcards.
+# Week 11: Clashcard Generator
+This flashcard application can help you study by making basic Q&A flashcards and cloze flashcards.
+
+Technologies: 
+* JS, Node.js
